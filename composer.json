@@ -1,0 +1,17 @@
+{
+  "name": "adv/bitrix_mysql_connection",
+  "description": "bitrix_mysql_connection",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Evgeniy Medvedev",
+      "email": "medvedev@adv.ru"
+    }
+  ],
+  "require": {
+    "php": ">=7.1.0"
+  },
+  "autoload": {
+    "classmap": ["src"]
+  }
+}
