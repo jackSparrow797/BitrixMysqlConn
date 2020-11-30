@@ -17,7 +17,7 @@ trait Reconnect
      */
     protected function isNeedTryConnect(): bool
     {
-        return $this->maxAttempts < $this->attempts;
+        return $this->maxAttempts > $this->attempts;
     }
 
     /**
