@@ -8,6 +8,14 @@ use Bitrix\Main\DB\SqlQueryException;
 class MysqliConnection extends BaseMysqliConnection
 {
     use Reconnect;
+
+    public function __construct(array $configuration)
+    {
+        parent::__construct($configuration);
+
+        $this->maxAttempts = $configuration['maxAttempts'] ?? $this->maxAttempts;
+    }
+
     /*********************************************************
      * Query
      *********************************************************/
@@ -47,6 +55,7 @@ class MysqliConnection extends BaseMysqliConnection
         if (!$result) {
             if ($this->isNeedReconnect() && $this->isNeedTryConnect()) {
                 $this->newAttempt();
+                $this->connect();
                 $result = $this->queryInternal($sql, $binds, $trackerQuery);
             } else {
                 throw new SqlQueryException('Mysql query error', $this->getErrorMessage(), $sql);
@@ -55,7 +64,5 @@ class MysqliConnection extends BaseMysqliConnection
 
         return $result;
     }
-
-
 
 }
